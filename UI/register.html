@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Regist Product</title>
+    
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+         <!-- 제이쿼리 라이브러리-->
+         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      </body>
+    </head>
+<body>
+    <div class ="container">
+    <br>
+    <h2>Register Forms</h2>
+    <!-- <form action="/asset" method=post>-->
+        <br>
+        <!-- label id, input-->
+        <label class ="form-label">Seller Name</label>
+        <input type="text" class="form-control" id="seller_name" />
+        <br />
+
+        <!-- label pw, input -->
+        <label class="form-label">Trade ID</label>
+        <input type="text" class="form-control" id="trade_id" />
+        <br />
+
+        <label class ="form-label">Product</label>
+        <input type="text" class="form-control" id="product" />
+        <br />
+        
+        <button class="btn btn-outline-danger" id="cr-btn">Regist Product</button>
+        &nbsp;
+        <a href= "/UI/check.html" class="btn btn-outline-success">Go Check Page</a>
+        &nbsp;
+        <a href= "/UI/trade.html" class="btn btn-outline-dark">Go Trade Page</a>
+        &nbsp;
+    <!-- </form> -->
+    </div>
+    <div>
+        <div class = "container">
+            &nbsp;
+            <p id="result"></p>
+        </div>
+    </div>
+</body>
+
+<script>
+    $("#cr-btn").click(() => {
+        const seller_name= $("#seller_name").val();
+        const trade_id = $("#trade_id").val();
+        const product = $("#product").val();
+        console.log(seller_name, trade_id, product);
+        $.post("/trade", {trade_id, product, seller_name}, (data, status) => {
+            console.log(status);
+            if(data.result == 'success'){
+                alert("success");
+            } else {
+                alert("fail");
+            }
+            const res = JSON.stringify(data);
+            $("#result").append("res");
+            $("#result").append("<p>"+JSON.stringify(data)+"</p>");
+        });
+    });
+</script>
+
+
+</html>
